@@ -4,5 +4,15 @@ from .models import *
 
 # Register your models here.
 
-admin.site.register(Pokemon)
+class PokemonAdmin(admin.ModelAdmin):
+    list_display = ('name', 'species', 'types')
+    
+    @admin.display(description='Tamanho do nome')
+    def teste(self, obj):
+        return len(obj.name)
+
+    #teste.short_description = "Tamanho do nome"
+
+
+admin.site.register(Pokemon, PokemonAdmin)
 admin.site.register(Pokedex)

@@ -20,6 +20,7 @@ TYPE_CHOICES = [
     ("DR", "Dark"),
     ("ST", "Steel"),
     ("FR", "Fairy"),
+    ("WT", "Water"),
 ]
 
 class Pokedex(models.Model):
