@@ -7,8 +7,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
-
-
+import pokebase as pb
 from .models import *
 
 
@@ -70,6 +69,13 @@ class PokemonDetail(LoginRequiredMixin, DetailView):
     model = Pokemon
     context_object_name = 'pokemon'
     template_name = 'pokedex/pokemon.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        species = context['pokemon'].species
+        poke = pb.pokemon(species.lower())
+        context['picture_id'] = str(poke.id).zfill(3)
+        return context
 
 
 class PokemonUpdate(LoginRequiredMixin, UpdateView):

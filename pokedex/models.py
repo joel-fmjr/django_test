@@ -32,11 +32,11 @@ class Pokemon(models.Model):
     weight = models.FloatField(null=True, blank=True)
     found = models.DateTimeField(auto_now_add=True)
     is_favorite = models.BooleanField(default=False)
-    user = models.OneToOneField(
+    user = models.ForeignKey(
         User, on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         ordering = ['-is_favorite']
 
     def __str__(self) -> str:
-        return f'{self.name} - {self.species}'
+        return self.name

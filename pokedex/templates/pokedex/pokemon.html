@@ -3,6 +3,7 @@
 
 <h1>{{ pokemon }}</h1>
 <ul>
+    <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/{{picture_id}}.png" alt="{{pokemon}}">
     <li>Species: {{ pokemon.species }}</li>
     <li>Tipo 1: {{ pokemon.type_1 }}</li>
     {% if pokemon.type_2 %}

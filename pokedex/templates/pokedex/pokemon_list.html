@@ -23,7 +23,7 @@
     </tr>
     {% for pokemon in pokemons %}
     <tr>
-        <td>{{ pokemon }}</td>
+        <td>{{ pokemon }} - {{pokemon.species}} </td>
         <td> <a href="{% url 'pokemon-update' pokemon.id %}">Edit</a></td>
         <td> <a href="{% url 'pokemon-details' pokemon.id %}">Details</a></td>
         <td> <a href="{% url 'pokemon-delete' pokemon.id %}">Remove</a></td>
