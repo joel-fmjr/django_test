@@ -33,7 +33,7 @@ class Pokemon(models.Model):
     found = models.DateTimeField(auto_now_add=True)
     is_favorite = models.BooleanField(default=False)
     user = models.OneToOneField(
-        User, on_delete=models.CASCADE)
+        User, on_delete=models.CASCADE, null=True, blank=True)
 
     class Meta:
         ordering = ['-is_favorite']
