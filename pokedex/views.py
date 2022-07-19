@@ -7,6 +7,7 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from django.db.models import Q
 
 
 from .models import *
@@ -51,7 +52,10 @@ class PokemonList(LoginRequiredMixin, ListView):
         search_input = self.request.GET.get('search-area') or ''
         if search_input:
             context['pokemons'] = context['pokemons'].filter(
-                name__icontains=search_input)
+                Q(name__icontains=search_input) |
+                Q(species__icontains=search_input)
+                )
+
         context['search_input'] = search_input
         return context
 

@@ -5,7 +5,7 @@ from .models import *
 # Register your models here.
 
 class PokemonAdmin(admin.ModelAdmin):
-    list_display = ('name', 'species', 'type_1', 'type_2', 'is_favorite')
+    list_display = ('name', 'species', 'type_1', 'type_2', 'is_favorite', 'user')
     search_fields = ('name','species', 'type_1', 'type_2')
     readonly_fields=('found','user')
 
