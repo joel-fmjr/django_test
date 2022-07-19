@@ -1,7 +1,11 @@
+{% extends 'pokedex/main.html' %}
+{% block content %}
+
 <form method="POST" >
     {% csrf_token %}
     <p>Are you sure you want to remove {{ pokemon }}?</p>
     <input type="submit" value="Remove" />
     <input type="reset" value="Cancel" onclick="location.href = '{% url 'pokedex' %}'" />
-
 </form>
+
+{% endblock content %}

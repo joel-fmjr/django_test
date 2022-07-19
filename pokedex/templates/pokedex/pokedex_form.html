@@ -1,4 +1,5 @@
-<!-- <h1>Task: {{ task }} </h1> -->
+{% extends 'pokedex/main.html' %}
+{% block content %}
 
 <form method="POST" action="">
     {% csrf_token %}
@@ -7,3 +8,4 @@
     <input type="submit" value="Confirmar" >
     <input type="reset" value="Cancelar" onclick="location.href = '{% url 'pokedex' %}' " >
 </form>
+{% endblock content %}
