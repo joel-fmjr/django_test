@@ -5,12 +5,9 @@ from .models import *
 # Register your models here.
 
 class PokemonAdmin(admin.ModelAdmin):
-    list_display = ('name', 'species', 'types', 'is_favorite')
-    search_fields = ['name','species', 'types']
-    readonly_fields=('captured','pokedex')
+    list_display = ('name', 'species', 'type_1', 'type_2', 'is_favorite')
+    search_fields = ('name','species', 'type_1', 'type_2')
+    readonly_fields=('found','user')
 
-class PokedexAdmin(admin.ModelAdmin):
-    readonly_fields=('user',)
     
 admin.site.register(Pokemon, PokemonAdmin)
-admin.site.register(Pokedex, PokedexAdmin)

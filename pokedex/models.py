@@ -23,24 +23,17 @@ TYPE_CHOICES = [('BG', 'Bug'),
                 ]
 
 
-class Pokedex(models.Model):
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE, primary_key=True)
-
-    def __str__(self) -> str:
-        return f"{self.user.username}'s pokedex"
-
-
 class Pokemon(models.Model):
     name = models.CharField(max_length=100)
     species = models.CharField(max_length=100)
-    types = models.CharField(max_length=100, choices=TYPE_CHOICES)
+    type_1 = models.CharField(max_length=100, choices=TYPE_CHOICES)
+    type_2 = models.CharField(max_length=100, choices=TYPE_CHOICES, null=True, blank=True)
     height = models.FloatField(null=True, blank=True)
     weight = models.FloatField(null=True, blank=True)
-    captured = models.DateTimeField(auto_now_add=True)
+    found = models.DateTimeField(auto_now_add=True)
     is_favorite = models.BooleanField(default=False)
-    pokedex = models.ForeignKey(
-        Pokedex, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['-is_favorite']

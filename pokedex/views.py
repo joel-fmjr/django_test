@@ -46,8 +46,7 @@ class PokemonList(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['pokedex'] = Pokedex.objects.filter(user=self.request.user)
-        context['pokemons'] = context['pokemons'].filter(pokedex__user=self.request.user)
+        context['pokemons'] = context['pokemons'].filter(user=self.request.user)
 
         search_input = self.request.GET.get('search-area') or ''
         if search_input:
@@ -59,11 +58,11 @@ class PokemonList(LoginRequiredMixin, ListView):
 
 class PokemonCreate(LoginRequiredMixin, CreateView):
     model = Pokemon
-    fields = ['name', 'species', 'types', 'height', 'weight', 'is_favorite']
+    fields = ['name', 'species', 'type_1', 'type_2', 'height', 'weight', 'is_favorite']
     success_url = reverse_lazy('pokedex')
 
     def form_valid(self, form):
-        form.instance.pokedex = Pokedex.objects.get(user=self.request.user) 
+        form.instance.user = self.request.user
         return super(PokemonCreate, self).form_valid(form)
 
 
@@ -75,7 +74,7 @@ class PokemonDetail(LoginRequiredMixin, DetailView):
 
 class PokemonUpdate(LoginRequiredMixin, UpdateView):
     model = Pokemon
-    fields = ['name', 'species', 'types', 'height', 'weight', 'is_favorite']
+    fields = ['name', 'species', 'type_1', 'type_2', 'height', 'weight', 'is_favorite']
     success_url = reverse_lazy('pokedex')
 
 
@@ -83,13 +82,3 @@ class PokemonDelete(LoginRequiredMixin, DeleteView):
     model = Pokemon
     context_object_name = 'pokemon'
     success_url = reverse_lazy('pokedex')
-
-
-class PokedexCreate(LoginRequiredMixin, CreateView):
-    model = Pokedex
-    fields = []
-    success_url = reverse_lazy('pokedex')
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(PokedexCreate, self).form_valid(form)
