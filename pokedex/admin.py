@@ -5,14 +5,12 @@ from .models import *
 # Register your models here.
 
 class PokemonAdmin(admin.ModelAdmin):
-    list_display = ('name', 'species', 'types')
+    list_display = ('name', 'species', 'types', 'is_favorite')
+    search_fields = ['name','species', 'types']
+    readonly_fields=('captured','pokedex')
+
+class PokedexAdmin(admin.ModelAdmin):
+    readonly_fields=('user',)
     
-    @admin.display(description='Tamanho do nome')
-    def teste(self, obj):
-        return len(obj.name)
-
-    #teste.short_description = "Tamanho do nome"
-
-
 admin.site.register(Pokemon, PokemonAdmin)
-admin.site.register(Pokedex)
+admin.site.register(Pokedex, PokedexAdmin)

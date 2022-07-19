@@ -1,33 +1,35 @@
-from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import User
 
 
-TYPE_CHOICES = [
-    ("NM", "Normal"),
-    ("FR", "Fire"),
-    ("FT", "Fighting"),
-    ("FL", "Flying"),
-    ("GR", "Grass"),
-    ("PS", "Poison"),
-    ("GN", "Ground"),
-    ("PY", "Psychic"),
-    ("RC", "Rock"),
-    ("IC", "Ice"),
-    ("BG", "Bug"),
-    ("DR", "Dragon"),
-    ("GH", "Ghost"),
-    ("DR", "Dark"),
-    ("ST", "Steel"),
-    ("FR", "Fairy"),
-    ("WT", "Water"),
-]
+TYPE_CHOICES = [('BG', 'Bug'),
+                ('DR', 'Dark'),
+                ('DR', 'Dragon'),
+                ('EL', 'Electric'),
+                ('FL', 'Flying'),
+                ('FR', 'Fairy'),
+                ('FR', 'Fire'),
+                ('FT', 'Fighting'),
+                ('GH', 'Ghost'),
+                ('GN', 'Ground'),
+                ('GR', 'Grass'),
+                ('IC', 'Ice'),
+                ('NM', 'Normal'),
+                ('PS', 'Poison'),
+                ('PY', 'Psychic'),
+                ('RC', 'Rock'),
+                ('ST', 'Steel'),
+                ('WT', 'Water')
+                ]
+
 
 class Pokedex(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, primary_key=True)
 
     def __str__(self) -> str:
         return f"{self.user.username}'s pokedex"
+
 
 class Pokemon(models.Model):
     name = models.CharField(max_length=100)
@@ -37,7 +39,11 @@ class Pokemon(models.Model):
     weight = models.FloatField(null=True, blank=True)
     captured = models.DateTimeField(auto_now_add=True)
     is_favorite = models.BooleanField(default=False)
-    pokedex = models.ForeignKey(Pokedex, on_delete=models.CASCADE, null=True, blank=True)
+    pokedex = models.ForeignKey(
+        Pokedex, on_delete=models.CASCADE, null=True, blank=True)
+
+    class Meta:
+        ordering = ['-is_favorite']
 
     def __str__(self) -> str:
         return f'{self.name} - {self.species}'

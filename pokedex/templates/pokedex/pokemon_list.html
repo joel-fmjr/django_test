@@ -4,11 +4,17 @@
 <hr>
 {% if pokedex %}
 <h1>My Pokedex</h1>
+
+<form method="GET" action="">
+    <input type="text" name="search-area" value="{{search_input}}" >
+    <input type="submit" value="Search">
+</form>
+
 <a href=" {% url 'pokemon-register' %} " >Add Pokemon</a>
 
 <table>
     <tr>
-        <th>Pokedex</th>
+        <th></th>
         <th></th>
         <th></th>
         <th></th>
@@ -17,7 +23,11 @@
     <tr>
         <td>{{ pokemon }}</td>
         <td> <a href="{% url 'pokemon-update' pokemon.id %}">Edit</a></td>
+        <td> <a href="{% url 'pokemon-details' pokemon.id %}">Details</a></td>
         <td> <a href="{% url 'pokemon-delete' pokemon.id %}">Remove</a></td>
+        {% if pokemon.is_favorite %}
+        <td>❤</td>
+        {% endif %}
         
     </tr>
     {% empty %}

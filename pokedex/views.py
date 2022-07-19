@@ -8,6 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 
+
 from .models import *
 
 
@@ -47,6 +48,12 @@ class PokemonList(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['pokedex'] = Pokedex.objects.filter(user=self.request.user)
         context['pokemons'] = context['pokemons'].filter(pokedex__user=self.request.user)
+
+        search_input = self.request.GET.get('search-area') or ''
+        if search_input:
+            context['pokemons'] = context['pokemons'].filter(
+                name__icontains=search_input)
+        context['search_input'] = search_input
         return context
 
 
@@ -60,9 +67,15 @@ class PokemonCreate(LoginRequiredMixin, CreateView):
         return super(PokemonCreate, self).form_valid(form)
 
 
+class PokemonDetail(LoginRequiredMixin, DetailView):
+    model = Pokemon
+    context_object_name = 'pokemon'
+    template_name = 'pokedex/pokemon.html'
+
+
 class PokemonUpdate(LoginRequiredMixin, UpdateView):
     model = Pokemon
-    fields = ['name', 'species', 'types', 'height', 'weight']
+    fields = ['name', 'species', 'types', 'height', 'weight', 'is_favorite']
     success_url = reverse_lazy('pokedex')
 
 

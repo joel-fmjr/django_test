@@ -8,8 +8,9 @@ urlpatterns = [
     path('register/', RegisterPage.as_view(), name='register'),
 
     path('pokedex', PokemonList.as_view(), name='pokedex'),
-    path('pokemon-register/', PokemonCreate.as_view(), name='pokemon-register'),
     path('pokedex-register/', PokedexCreate.as_view(), name='pokedex-register'),
+    path('pokemon-register/', PokemonCreate.as_view(), name='pokemon-register'),
+    path('pokemon-details/<int:pk>/', PokemonDetail.as_view(), name='pokemon-details'),
     path('pokemon-update/<int:pk>/', PokemonUpdate.as_view(), name='pokemon-update'),
     path('pokemon-delete/<int:pk>/', PokemonDelete.as_view(), name='pokemon-delete'),
 
