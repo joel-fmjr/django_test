@@ -1,0 +1,7 @@
+<!-- <h1>Task: {{ task }} </h1> -->
+<form method="POST" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" >
+    <input type="reset" value="Cancelar" onclick="location.href = '{% url 'pokedex' %}' " >
+</form>
