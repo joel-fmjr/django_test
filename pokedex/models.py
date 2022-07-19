@@ -2,24 +2,24 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-TYPE_CHOICES = [('BG', 'Bug'),
-                ('DR', 'Dark'),
-                ('DR', 'Dragon'),
-                ('EL', 'Electric'),
-                ('FL', 'Flying'),
-                ('FR', 'Fairy'),
-                ('FR', 'Fire'),
-                ('FT', 'Fighting'),
-                ('GH', 'Ghost'),
-                ('GN', 'Ground'),
-                ('GR', 'Grass'),
-                ('IC', 'Ice'),
-                ('NM', 'Normal'),
-                ('PS', 'Poison'),
-                ('PY', 'Psychic'),
-                ('RC', 'Rock'),
-                ('ST', 'Steel'),
-                ('WT', 'Water')
+TYPE_CHOICES = [('Bug', 'Bug'),
+                ('Dark', 'Dark'),
+                ('Dragon', 'Dragon'),
+                ('Electric', 'Electric'),
+                ('Flying', 'Flying'),
+                ('Fairy', 'Fairy'),
+                ('Fire', 'Fire'),
+                ('Fighting', 'Fighting'),
+                ('Ghost', 'Ghost'),
+                ('Ground', 'Ground'),
+                ('Grass', 'Grass'),
+                ('Ice', 'Ice'),
+                ('Normal', 'Normal'),
+                ('Poison', 'Poison'),
+                ('Psychic', 'Psychic'),
+                ('Rock', 'Rock'),
+                ('Steel', 'Steel'),
+                ('Water', 'Water')
                 ]
 
 

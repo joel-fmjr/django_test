@@ -1,6 +1,18 @@
 {% extends 'pokedex/main.html' %}
 {% block content %}
 
-<h1>Pokémon: {{ pokemon }} </h1>
+<h1>{{ pokemon }}</h1>
+<ul>
+    <li>Species: {{ pokemon.species }}</li>
+    <li>Tipo 1: {{ pokemon.type_1 }}</li>
+    {% if pokemon.type_2 %}
+    <li>Tipo 2: {{ pokemon.type_2 }}</li>
+    {% endif %}
+    <li>Height: {{ pokemon.height }}</li>
+    <li>Weight: {{ pokemon.weight }}</li>
+
+
+
+</ul>
 
 {% endblock content %}
